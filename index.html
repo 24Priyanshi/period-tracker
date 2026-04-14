@@ -4,82 +4,180 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Period Tracker</title>
     <link rel="stylesheet" href="index.css">
 </head>
 <body>
-    
+
     <div class="navbar">
         <ul>
-            
-            <li class="poppy">Home</li>
-            <li class="poppy">Tracker</li>
-            <li class="poppy">Journal</li>
-            <li class="poppy">About</li>
-            <li class="poppy">Contact Us</li>
-            <li id="mynav"><H2>Period Tracker<h2</li>        </ul>
-    
+            <li class="poppy" data-page="home">Home</li>
+            <li class="poppy" data-page="tracker">Tracker</li>
+            <li class="poppy" data-page="journal">Journal</li>
+            <li class="poppy" data-page="about">About</li>
+            <li id="mynav"><h2>Period Tracker</h2></li>
+        </ul>
     </div>
-   <div class="b1">
-    <div class="container">
-        <div class="date">
-            <h3>April 2023</h3>
-            <div class="days">
-                    <div class="day">Sun</div>
-                    <div class="day">Mon</div>
-                    <div class="day">Tue</div>
-                    <div class="day">Wed</div>
-                    <div class="day">Thu</div>
-                    <div class="day">Fri</div>
-                    <div class="day">Sat</div>
 
-                    <div class="prev-date">26</div> 
-                      <div class="prev-date">27</div>
-                      <div class="prev-date">28</div>
-                      <div class="prev-date">29</div>
-                      <div class="prev-date">30</div>
-                      <div class="prev-date">31</div>
-                      <div class="number">1</div>
-                      <div class="number">2</div>
-                      <div class="number">3</div>
-                      <div class="number">4</div>
-                      <div class="number">5</div>
-                      <div class="number">6</div>
-                      <div class="number">7</div>
-                      <div class="number">8</div>
-                      <div class="number">9</div>
-                      <div class="number">10</div>
-                      <div class="number">11</div>
-                      <div class="number">12</div>
-                      <div class="number">13</div>
-                      <div class="number">14</div>
-                      <div class="number">15</div>
-                      <div class="number">16</div>
-                      <div class="number">17</div>
-                      <div class="number">18</div>
-                      <div class="number">19</div>
-                      <div class="number">20</div>
-                      <div class="number">21</div>
-                      <div class="number">22</div>
-                      <div class="number">23</div>
-                      <div class="number">24</div>
-                      <div class="number">25</div>
-                      <div class="number">26</div>
-                      <div class="number">27</div>
-                      <div class="number">28</div>
-                      <div class="number">29</div>
-                      <div class="number">30</div>
-                      <div class="number">31</div>
+    <div class="b1">
+
+        <!-- ================== HOME (calendar + prediction) ================== -->
+        <section class="page" id="page-home">
+            <div class="container">
+
+                <div class="date">
+                    <div class="month-nav">
+                        <button class="nav-btn" id="prevMonth">&lsaquo;</button>
+                        <h3 id="monthLabel">Month Year</h3>
+                        <button class="nav-btn" id="nextMonth">&rsaquo;</button>
                     </div>
 
-            </div>
-            <div class="image">
-                <img src="https://img.freepik.com/free-vector/girl-power-reproductive-system-concept_23-2148658188.jpg" alt="">
-            </div>
+                    <div class="days" id="calendar"></div>
 
-        </div>
+                    <div class="legend">
+                        <span><i class="sw period"></i> Logged period</span>
+                        <span><i class="sw predicted"></i> Predicted period</span>
+                        <span><i class="sw fertility"></i> Fertile window</span>
+                        <span><i class="sw today"></i> Today</span>
+                    </div>
+                </div>
+
+                <div class="side-panel">
+                    <h3>Your Cycle</h3>
+                    <label>Last period started
+                        <input type="date" id="lastStart">
+                    </label>
+                    <label>Average cycle length (days)
+                        <input type="number" id="cycleLen" min="18" max="45" value="28">
+                    </label>
+                    <label>Average period duration (days)
+                        <input type="number" id="periodDur" min="1" max="14" value="5">
+                    </label>
+                    <button class="btn1" id="saveSettings">Save &amp; Predict</button>
+
+                    <div class="prediction-box" id="predictionBox">
+                        <p class="muted">Enter your last period date to see predictions.</p>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- ================== TRACKER (symptom logging) ================== -->
+        <section class="page hidden" id="page-tracker">
+            <div class="container tracker">
+                <h3>Daily Log — <span id="trackerDate"></span></h3>
+
+                <label class="date-picker">Date
+                    <input type="date" id="trackerDateInput">
+                </label>
+
+                <div class="log-group">
+                    <span class="log-label">Flow volume</span>
+                    <div class="likert" data-field="flow">
+                        <button data-v="0">None</button>
+                        <button data-v="1">Spotting</button>
+                        <button data-v="2">Light</button>
+                        <button data-v="3">Medium</button>
+                        <button data-v="4">Heavy</button>
+                        <button data-v="5">Very Heavy</button>
+                    </div>
+                </div>
+
+                <div class="log-group">
+                    <span class="log-label">Cramps</span>
+                    <div class="likert" data-field="cramps">
+                        <button data-v="0">0</button><button data-v="1">1</button>
+                        <button data-v="2">2</button><button data-v="3">3</button>
+                        <button data-v="4">4</button><button data-v="5">5</button>
+                    </div>
+                </div>
+
+                <div class="log-group">
+                    <span class="log-label">Mood swings</span>
+                    <div class="likert" data-field="mood">
+                        <button data-v="0">0</button><button data-v="1">1</button>
+                        <button data-v="2">2</button><button data-v="3">3</button>
+                        <button data-v="4">4</button><button data-v="5">5</button>
+                    </div>
+                </div>
+
+                <div class="log-group">
+                    <span class="log-label">Fatigue</span>
+                    <div class="likert" data-field="fatigue">
+                        <button data-v="0">0</button><button data-v="1">1</button>
+                        <button data-v="2">2</button><button data-v="3">3</button>
+                        <button data-v="4">4</button><button data-v="5">5</button>
+                    </div>
+                </div>
+
+                <div class="log-group">
+                    <span class="log-label">Bloating</span>
+                    <div class="likert" data-field="bloating">
+                        <button data-v="0">0</button><button data-v="1">1</button>
+                        <button data-v="2">2</button><button data-v="3">3</button>
+                        <button data-v="4">4</button><button data-v="5">5</button>
+                    </div>
+                </div>
+
+                <div class="log-group">
+                    <span class="log-label">Headache</span>
+                    <div class="likert" data-field="headache">
+                        <button data-v="0">0</button><button data-v="1">1</button>
+                        <button data-v="2">2</button><button data-v="3">3</button>
+                        <button data-v="4">4</button><button data-v="5">5</button>
+                    </div>
+                </div>
+
+                <button class="btn1" id="saveLog">Save Log</button>
+                <p class="status" id="trackerStatus"></p>
+            </div>
+        </section>
+
+        <!-- ================== JOURNAL ================== -->
+        <section class="page hidden" id="page-journal">
+            <div class="container journal">
+                <h3>Journal</h3>
+                <label class="date-picker">Date
+                    <input type="date" id="journalDate">
+                </label>
+                <textarea id="journalText" rows="10"
+                    placeholder="How are you feeling today?"></textarea>
+                <button class="btn1" id="saveJournal">Save Entry</button>
+                <p class="status" id="journalStatus"></p>
+
+                <h4 style="margin-top: 1.5rem;">Recent entries</h4>
+                <div id="journalList"></div>
+            </div>
+        </section>
+
+        <!-- ================== ABOUT ================== -->
+        <section class="page hidden" id="page-about">
+            <div class="container about">
+                <h3>About</h3>
+                <p>
+                    A lightweight menstrual-cycle tracker with on-device
+                    prediction of your next period. All your data stays in
+                    your browser's <code>localStorage</code> &mdash; nothing
+                    is sent to any server.
+                </p>
+                <p>
+                    The prediction uses a simple rule: <em>next period start =
+                    last period start + average cycle length</em>. The
+                    fertile window is marked ~14&ndash;10 days before the
+                    predicted next period.
+                </p>
+                <p>
+                    Backed by an LSTM regressor trained on the mcPHASES
+                    menstrual-health research dataset
+                    (<strong>CV MAE &asymp; 4.3 days</strong>). See
+                    <code>APPROACH.md</code> for the modelling details.
+                </p>
+            </div>
+        </section>
+
     </div>
-   </div>
-<div class="staringDate"></div>
+
+    <script src="app.js"></script>
 </body>
 </html>

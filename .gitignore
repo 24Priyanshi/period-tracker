@@ -1,0 +1,47 @@
+# ============================================================
+# Generated / trained artefacts — anyone can re-create these by
+# running `python eda.py` and `python train_lstm.py` (or the
+# Colab notebook). Do NOT commit them.
+# ============================================================
+
+# EDA plots produced by eda.py
+figures/
+
+# Trained LSTM artefacts produced by train_lstm.py / colab_train_lstm.ipynb
+lstm_best.pt
+lstm_scaler.npz
+lstm_metrics.json
+
+# NOTE: master_daily.csv and cycles.csv are COMMITTED — they are required
+# inputs for train_lstm.py and the Colab notebook. Regenerating them needs
+# the raw mcPHASES CSVs which are not in this repo.
+
+# ============================================================
+# Python environment
+# ============================================================
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+.venv/
+venv/
+env/
+.Python
+
+# Jupyter checkpoints (but KEEP the committed .ipynb itself)
+.ipynb_checkpoints/
+
+# ============================================================
+# IDE / editor
+# ============================================================
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# ============================================================
+# OS
+# ============================================================
+.DS_Store
+Thumbs.db
+desktop.ini
