@@ -1,34 +1,40 @@
-# I will generate a comprehensive README.md file and save it as a download.
+# Menstrual Cycle Arrival Prediction using LSTM
 
-readme_content = """# Menstrual Cycle Arrival Prediction using LSTM
+This repository contains a deep learning project that predicts the number of days remaining until the start of the next menstrual cycle. By leveraging time-series data including hormonal fluctuations and daily symptoms, the model provides a personalized prediction based on biological markers.
 
-This repository contains a deep learning project focused on predicting the arrival date of the menstrual cycle. By leveraging time-series physiological data and hormonal markers, the project uses a Long Short-Term Memory (LSTM) network to provide a "days-until-arrival" countdown.
+## 🚀 Project Overview
+The goal of this project is to create a data-driven approach to cycle tracking. By using an **LSTM (Long Short-Term Memory)** network, the model learns the specific hormonal and physical cues that signal the onset of the menstrual phase.
 
-## 📌 Project Overview
-The goal of this project is to provide a predictive model that goes beyond simple calendar tracking. By analyzing fluctuations in hormones like LH, Estrogen, and PdG, alongside logged symptoms (cramps, bloating, mood, etc.), the model identifies the biological patterns that precede a period.
-
-## 📊 Dataset Features
-The model is trained on `processed_period_data.csv`, which includes:
-- **Hormonal Data:** LH (Luteinizing Hormone), Estrogen, and PdG (Progesterone).
-- **Physical Symptoms:** Cramps, Bloating, Sore Breasts, Indigestion, and Headaches.
-- **Mental Health Markers:** Stress levels and Mood swings.
-- **Lifestyle Data:** Exercise levels, sleep quality, and sedentary behavior.
-- **Phases:** Categorization into Menstrual, Follicular, Fertility, and Luteal phases.
+## 📊 Dataset Description
+The model is trained on `processed_period_data.csv`, which includes 5,730 daily records across multiple users.
+- **Hormone Markers:** LH (Luteinizing Hormone), Estrogen, and PdG (Progesterone).
+- **Physical Symptoms:** Cramps, fatigue, sore breasts, bloating, and headaches.
+- **Psychological Markers:** Stress levels and mood swings.
+- **Lifestyle Factors:** Activity levels (sedentary/light) and sleep quality.
 
 ## 🧠 Model Architecture
-The core of the prediction engine is an **LSTM (Long Short-Term Memory)** network, chosen for its ability to remember long-term dependencies in time-series data.
-- **Input:** A 10-day sliding window of history (18 features per day).
-- **Layers:** - LSTM (64 units) with Dropout (0.2)
-    - LSTM (32 units) with Dropout (0.2)
-    - Dense layer (16 units, ReLU)
-    - Dense Output (1 unit, Linear)
-- **Target:** Number of days until the next 'Menstrual' phase start.
+LSTMs are highly effective for this task as they can retain information about previous days in the cycle to predict future events.
+- **Input:** 10-day sliding window of physiological data.
+- **Network:** - LSTM Layer (64 units)
+  - Dropout Layer (0.2)
+  - LSTM Layer (32 units)
+  - Dense Regression Layer (Output: Days to Period)
+- **Optimizer:** Adam
+- **Loss Function:** Mean Squared Error (MSE)
 
-## 📈 Performance
-- **Mean Absolute Error (MAE):** ~5.97 days
-- **Root Mean Squared Error (RMSE):** ~8.18 days
+## 📈 Key Visualizations
+Included in the analysis are:
+1. **Hormone Trends:** Mapping average LH, Estrogen, and PdG levels across cycle phases.
+2. **Symptom Heatmaps:** Correlation of symptoms like cramps and bloating with specific phases.
+3. **Loss Curves:** Documentation of model convergence during training.
+4. **Actual vs. Predicted:** Comparison of the model's countdown versus the actual cycle start.
 
-## 🛠️ Installation & Usage
-1. **Clone the repo:**
-   ```bash
-   git clone [https://github.com/your-username/period-prediction-lstm.git](https://github.com/your-username/period-prediction-lstm.git)
+## 🛠️ Requirements
+- Python 3.8+
+- TensorFlow / Keras
+- Pandas & NumPy
+- Scikit-learn
+- Matplotlib & Seaborn
+
+## 📝 Disclaimer
+This tool is for educational and research purposes only and should not be used as a substitute for professional medical advice or as a primary method of birth control.
