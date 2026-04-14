@@ -1,161 +1,423 @@
-*{
-    margin:0px;
+* {
+    margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
-body{
+
+body {
     font-family: 'Inter', sans-serif;
-    color: white;
-    
-    height: 100vh;
-    /*display: flex;*/
-    align-items: center;
-    justify-content: center;
+    color: rgb(40, 30, 30);
+    min-height: 100vh;
     background-image: url("background2.jpeg");
     background-repeat: no-repeat;
     background-size: cover;
-
-}
-.container{
-position: relative;
-height: 500px;
-width: 1000px;
-display: flex;
-align-items: center;
-justify-content: space-between;
-background-color: rgb(225, 185, 177);
-box-shadow: 10px 10px 20px  black;
-
+    background-attachment: fixed;
 }
 
-.container .days{
-    display: flex;
-    flex-wrap: wrap;
-}
-.container .day,
-.container .number
-{
-    height: 45px;
-    width: 45px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: default;
-}
-.container .prev-date
-{
-    height: 45px;
-    width: 45px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: default;
-
-
-
-}
-.container .prev-date{
-    color: rgb(109, 89, 89);
-}
-.container .number:hover,
-.container .pre-date:hover{
-    border: 2px solid;
-    
-    
-}
-.container .date
-{
-    width: 380px;
-    padding: 25px;
-
-}
-.container h3{
-    font-size: 30px;
-    font-weight: 700;
-    margin: 0 15px 30px;
-
-
-}
-.container .image{
-    position: absolute;
-    top :0px;
-    right: 0px;
-
-}
-.container img{
-    height: 500px; 
-    padding: 30px;
-    width: 500px;
-}
-.navbar{
-    
+/* ======================= navbar ======================= */
+.navbar {
     color: rgb(61, 53, 53);
     width: 100%;
     position: fixed;
-    
+    top: 0;
+    left: 0;
+    z-index: 100;
+    backdrop-filter: blur(4px);
+    background: rgba(255, 255, 255, 0.25);
+}
 
-} 
-.b1{
-    height: 100vh;
-    width: 100vw;
+.navbar ul {
     display: flex;
-    justify-content: center;
+    list-style-type: none;
     align-items: center;
 }
-.navbar ul{
-    display:flex;
-    list-style-type: none;
-    
-}
-.navbar ul li{
+
+.navbar ul li {
     margin: 1rem;
-
-    
 }
-.poppy:hover{
-    border-bottom: 2px solid black ;
+
+.poppy {
     cursor: pointer;
-
+    padding: 4px 2px;
+    transition: border-color 0.2s;
+    border-bottom: 2px solid transparent;
 }
-#mynav{
-    padding-left: 14rem;
+
+.poppy:hover,
+.poppy.active {
+    border-bottom: 2px solid black;
+}
+
+#mynav {
+    margin-left: auto;
+    padding-right: 2rem;
     font-family: "Lucida handwriting", "Courier New", monospace;
     font-size: 20px;
     color: rgb(14, 13, 13);
     font-weight: 900;
-    /* text-shadow: 0 0 3px #090808, 0 0 5px #000000; */
-
 }
-.buttons{
+
+/* ======================= page layout ======================= */
+.b1 {
+    min-height: 100vh;
     width: 100vw;
     display: flex;
     justify-content: center;
     align-items: center;
-   
-    margin-left: 250px;
-   
-    
+    padding: 5rem 1rem 2rem;
+}
 
+.page.hidden {
+    display: none;
 }
-.btn1
-{
-    margin: left;
-    padding: 1rem;
-    margin-bottom: 10rem;
-    background-color: rgb(238, 245, 194);
-    border-radius: 15px;
-    font-size: 14px ;
-    border: 2px solid rgb(255, 221, 136) ;
-    width: 300px;
-    display: inline-block;
-   
+
+.container {
+    position: relative;
+    width: 1000px;
+    max-width: 95vw;
+    min-height: 520px;
+    display: flex;
+    align-items: stretch;
+    gap: 2rem;
+    padding: 2rem;
+    background-color: rgb(225, 185, 177);
+    box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.5);
+    border-radius: 6px;
 }
-.btn:hover{
+
+.container.tracker,
+.container.journal,
+.container.about {
+    display: block;
+    padding: 2.5rem;
+}
+
+.container h3 {
+    font-size: 26px;
+    font-weight: 700;
+    margin-bottom: 1.25rem;
+}
+
+/* ======================= calendar ======================= */
+.date {
+    flex: 1;
+    min-width: 0;
+}
+
+.month-nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+    padding: 0 10px;
+}
+
+.month-nav h3 {
+    margin: 0;
+    font-size: 22px;
+}
+
+.nav-btn {
+    background: transparent;
+    border: 1px solid rgba(0, 0, 0, 0.3);
+    border-radius: 50%;
+    height: 32px;
+    width: 32px;
+    font-size: 18px;
     cursor: pointer;
-    background: none;
-    color: rgb(223, 223, 236);
-    font-size: 20px;
-    border: none;
-    transition-duration: 0.4s;
-    
+    color: inherit;
+    transition: background 0.2s;
+}
+
+.nav-btn:hover {
+    background: rgba(255, 255, 255, 0.4);
+}
+
+.days {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 4px;
+}
+
+.day,
+.number,
+.prev-date {
+    height: 42px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: default;
+    border-radius: 50%;
+    font-size: 14px;
+    position: relative;
+}
+
+.day {
+    font-weight: 700;
+    color: rgba(0, 0, 0, 0.6);
+    cursor: default;
+}
+
+.prev-date {
+    color: rgb(150, 130, 130);
+}
+
+.number {
+    cursor: pointer;
+    transition: background 0.15s;
+}
+
+.number:hover {
+    background: rgba(255, 255, 255, 0.5);
+}
+
+/* color-coded states */
+.number.period {
+    background: #d62828;
+    color: white;
+    font-weight: 700;
+}
+
+.number.predicted {
+    background: rgba(214, 40, 40, 0.35);
+    color: rgb(60, 10, 10);
+    font-weight: 600;
+    border: 1.5px dashed #d62828;
+}
+
+.number.fertility {
+    background: rgba(42, 157, 143, 0.35);
+    color: rgb(10, 60, 50);
+    border: 1.5px dashed #2a9d8f;
+}
+
+.number.today {
+    outline: 2.5px solid #264653;
+    outline-offset: -2px;
+}
+
+.number.has-log::after {
+    content: "";
+    position: absolute;
+    bottom: 3px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background: #264653;
+}
+
+/* legend */
+.legend {
+    margin-top: 1.2rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    font-size: 12px;
+    color: rgba(40, 30, 30, 0.85);
+}
+
+.legend .sw {
+    display: inline-block;
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    margin-right: 4px;
+    vertical-align: middle;
+}
+
+.legend .sw.period    { background: #d62828; }
+.legend .sw.predicted { background: rgba(214, 40, 40, 0.35); border: 1.5px dashed #d62828; }
+.legend .sw.fertility { background: rgba(42, 157, 143, 0.35); border: 1.5px dashed #2a9d8f; }
+.legend .sw.today     { background: transparent; outline: 2px solid #264653; }
+
+/* ======================= side panel ======================= */
+.side-panel {
+    width: 320px;
+    padding: 0 0.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.9rem;
+}
+
+.side-panel label,
+.container label {
+    display: flex;
+    flex-direction: column;
+    font-size: 13px;
+    font-weight: 600;
+    gap: 4px;
+    color: rgba(40, 30, 30, 0.85);
+}
+
+.side-panel input,
+.container input,
+.container textarea {
+    padding: 8px 10px;
+    border-radius: 6px;
+    border: 1px solid rgba(0, 0, 0, 0.15);
+    background: rgba(255, 255, 255, 0.7);
+    font-size: 14px;
+    font-family: inherit;
+    color: rgb(40, 30, 30);
+}
+
+.side-panel input:focus,
+.container input:focus,
+.container textarea:focus {
+    outline: 2px solid rgb(214, 40, 40);
+    outline-offset: -1px;
+}
+
+.prediction-box {
+    margin-top: 0.5rem;
+    padding: 1rem;
+    background: rgba(255, 255, 255, 0.55);
+    border-radius: 8px;
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+.prediction-box strong {
+    color: #8b1a1a;
+}
+
+.muted { color: rgba(40, 30, 30, 0.6); }
+
+/* ======================= tracker likert ======================= */
+.log-group {
+    margin-bottom: 1rem;
+}
+
+.log-label {
+    display: block;
+    font-size: 13px;
+    font-weight: 600;
+    margin-bottom: 6px;
+}
+
+.likert {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+}
+
+.likert button {
+    flex: 1;
+    min-width: 50px;
+    padding: 8px 6px;
+    background: rgba(255, 255, 255, 0.55);
+    border: 1px solid rgba(0, 0, 0, 0.15);
+    border-radius: 6px;
+    font-size: 12px;
+    cursor: pointer;
+    transition: all 0.15s;
+    color: inherit;
+    font-family: inherit;
+}
+
+.likert button:hover {
+    background: rgba(255, 255, 255, 0.85);
+}
+
+.likert button.selected {
+    background: #d62828;
+    color: white;
+    border-color: #8b1a1a;
+    font-weight: 700;
+}
+
+.date-picker {
+    margin-bottom: 1rem;
+    max-width: 220px;
+}
+
+/* ======================= journal ======================= */
+.container textarea {
+    width: 100%;
+    resize: vertical;
+    margin-bottom: 1rem;
+}
+
+#journalList .entry {
+    background: rgba(255, 255, 255, 0.5);
+    padding: 10px 14px;
+    margin-bottom: 8px;
+    border-radius: 6px;
+    border-left: 3px solid #d62828;
+}
+
+#journalList .entry time {
+    font-size: 12px;
+    font-weight: 700;
+    color: #8b1a1a;
+    display: block;
+    margin-bottom: 4px;
+}
+
+#journalList .entry p {
+    font-size: 14px;
+    white-space: pre-wrap;
+}
+
+/* ======================= about ======================= */
+.about p {
+    font-size: 14px;
+    line-height: 1.7;
+    margin-bottom: 0.9rem;
+}
+
+.about code {
+    background: rgba(255, 255, 255, 0.5);
+    padding: 1px 6px;
+    border-radius: 3px;
+    font-size: 13px;
+}
+
+/* ======================= buttons + misc ======================= */
+.btn1 {
+    padding: 10px 16px;
+    margin-top: 0.5rem;
+    background-color: rgb(238, 245, 194);
+    border-radius: 10px;
+    font-size: 14px;
+    border: 2px solid rgb(255, 221, 136);
+    cursor: pointer;
+    font-family: inherit;
+    font-weight: 600;
+    color: rgb(40, 30, 30);
+    transition: transform 0.1s;
+}
+
+.btn1:hover {
+    transform: translateY(-1px);
+    background-color: rgb(248, 252, 220);
+}
+
+.btn1:active {
+    transform: translateY(0);
+}
+
+.status {
+    font-size: 13px;
+    color: #2a9d8f;
+    font-weight: 600;
+    margin-top: 8px;
+    min-height: 1em;
+}
+
+/* ======================= responsive ======================= */
+@media (max-width: 860px) {
+    .container {
+        flex-direction: column;
+        padding: 1.5rem;
+    }
+    .side-panel {
+        width: 100%;
+    }
+    .day, .number, .prev-date {
+        height: 36px;
+        font-size: 13px;
+    }
 }
